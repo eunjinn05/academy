@@ -1,26 +1,27 @@
 <main class="px-3 form-notice-list">
     <table class="notice-list-table">
         <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>글쓴이</th>
-            <th>편집</th>
+            <th style="width: 15%;">번호</th>
+            <th style="width: 50%;">제목</th>
+            <th style="width: 15%;">글쓴이</th>
+            <th style="width: 20%;">편집</th>
         </tr>
 
-        <?php for($i=0; $i<=9; $i++) { ?>
+        <?php foreach ($list_data->result() as $row) { ?>
         <tr>
             <td>1</td>
-            <td>얘들아 말 좀 잘 들어라</td>
-            <td>선생님</td>
+            <td><?php echo $row->title; ?></td>
+            <td><?php echo $row->writer; ?></td>
             <td>
-                <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>
+                <a href="/index.php/notice/write/<?php echo $row->idx; ?>" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>
                 <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">삭제</a>
             </td>
         </tr>
         <?php } ?>
     </table>
 
-    <div class="notice-list-bottom">
+    <div class="notice-list-bottom">    
+        <?php echo $this->pagination->create_links();?>    
         <div class="notice-list-write-btn">
             <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">글쓰기</a>        
         </div>

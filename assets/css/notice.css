@@ -8,7 +8,14 @@
     border: solid 1px #eee;
     margin: 0 auto;
     width: 80%;
-    height: 90%;
+}
+
+th {
+    height: 80px;
+}
+
+tr {
+    height: 85px;
 }
 
 th, tr, td {
@@ -42,3 +49,17 @@ th, tr, td {
 .write-btn-form {
     margin-top: 20px;
 }
+
+.upload-file {
+    display: inline;
+}
+
+.upload-file-img {
+    width:150px;
+    height:150px;
+}
+
+
+
+
+

@@ -5,40 +5,80 @@ $(function(){
     });
 
     $(document).on("click", "#writeBtn", function () {
-       var title = $('#title').val();
-       ckeditorUpdate();
-       var content = $('#content').val();
+      ckeditorUpdate();
+      var title = $('#title').val();
+      var content = $('#content').val();
+      var idx = $("#idx").val();
+      var files = Array();
 
-       if (title == null) {
+       if (title == "") {
           alert("제목을 입력해주세요.");
           return false;
        }
 
-       if (content == null) {
+       if (content == "") {
           alert("내용을 입력해주세요.");
           return false;
        }
 
+        $(".upload-file-data").each(function(i, e) {
+          files.push($(e).val());
+        });
+
        $.ajax({
             type : "POST", 
-            url : '/index.php/login/notice_write_exec',
+            url : '/index.php/notice/notice_write_exec',
             dataType: 'json',
             async: false,
               data : {
                   title : title,
-                  content : content
+                  content : content,
+                  files : files,
+                  idx : idx
               },
             success: function (result) {
-              console.log(result);
-              // if (result.result == true) {
-              //   // alert("등록되었습니다.")
-              // } else {
-              // }
+              var res = JSON.parse(result);
+              if (res.result == true) {
+                alert("등록되었습니다.");
+              } else {
+                alert("다시 확인해주세요.");
+              }
             }
         })
 
     });
-    
+
+    $(document).on("click", ".upload-file", function () {
+      $(this).remove();
+    });
+
+    $(document).on("change", "#file", function () {
+      var formData = new FormData();
+      
+      const files = this.files;
+      for (let i = 0; i < files.length; i++) {
+          formData.append('files[]', files[i])
+      }
+
+      $.ajax({
+          type : "POST", 
+          url : '/index.php/notice/notice_upload_exec',
+          data : formData,
+          processData: false,
+          contentType: false,
+          success: function (result) {
+            var res = JSON.parse(result);
+            if (res.success) {
+              for(var i=0; i<res.files.length; i++) {
+                $('.upload-file-list').append("<div class='upload-file'><img src='"+res.files[i].path+"' class='upload-file-img'> <input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+              }
+            } else {
+              alert(res.message);
+            }
+          }
+      });
+
+    });
 
     function ckeditorUpdate() {
       for ( instance in CKEDITOR.instances ) {

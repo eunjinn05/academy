@@ -3,19 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Notice extends CI_Controller {
 
-	public function index()
+	public function list($page = 1)
 	{
 		$this->load->library('pagination');
         $this->load->model('notice_model');
 
-		$config['base_url'] = 'http://127.0.0.1:81/index.php/';
-		$config['total_rows'] = $this->notice_model->notice_board_count(); 
+		$config['base_url'] = 'http://127.0.0.1:81/index.php/notice/list';
+		$config['total_rows'] = $this->notice_model->notice_board_count();
 		$config['per_page'] = 10;
+        $config['uri_segment'] = 3;
+        $config['use_page_numbers'] = TRUE;
+
+        // Initialize the pagination library
+        $this->pagination->initialize($config);
+
+        // Fetch paginated data from your model
+        $limit = $config['per_page'];
+        $page_number = $this->uri->segment($config['uri_segment'], 1);
+        $start_index = ($page_number - 1) * $limit;
 
 		$this->pagination->initialize($config);
 
         $class_data['class_name'] = $this->router->fetch_class();
-        $class_data['list_data'] = $this->notice_model->notice_list_exec();
+        $class_data['list_data'] = $this->notice_model->notice_list_exec($start_index, $limit);
 
 		$this->load->view("layout/head", $class_data);
 		$this->load->view('notice/list');

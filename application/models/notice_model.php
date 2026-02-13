@@ -8,10 +8,10 @@
 
         public function notice_write_exec()
         {
-            $title = $_POST['title'];
-            $content = $_POST['content'];
-            $files = $_POST['files'];
-            $idx = $_POST['idx'];
+            $title = @$_POST['title'];
+            $content = @$_POST['content'];
+            $files = @$_POST['files'];
+            $idx = @$_POST['idx'];
 
             if (@$title && @$content) {
                 if (@$idx) {
@@ -26,9 +26,11 @@
                     $idx = $this->db->insert_id();
                 }
                 if ($res) {
-                    for ($i=0; $i<count($files); $i++) {
-                        $sql = "INSERT INTO file (board_type, file_path, board_idx) VALUES (?, ?, ?)";
-                        $res = $this->db->query($sql, array('notice', $files[$i], $idx));
+                    if (@$files) {
+                        for ($i=0; $i<count($files); $i++) {
+                            $sql = "INSERT INTO file (board_type, file_path, board_idx) VALUES (?, ?, ?)";
+                            $res = $this->db->query($sql, array('notice', $files[$i], $idx));
+                        }
                     }
                     echo json_encode(array("return"=>true));
                 } else {
@@ -86,8 +88,8 @@
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
     }
 
-    public function notice_list_exec($idx = 1) {
-        $sql = "SELECT * FROM notice limit 0, 10";
+    public function notice_list_exec($start, $end) {
+        $sql = "SELECT * FROM notice limit $start, $end";
         $query = $this->db->query($sql);
         return $query;
     }

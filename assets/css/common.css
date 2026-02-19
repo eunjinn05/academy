@@ -8,6 +8,7 @@
   color: rgba(255, 255, 255, .5);
   background-color: transparent;
   border-bottom: .25rem solid transparent;
+  position: relative;
 }
 
 .nav-masthead .nav-link:hover,
@@ -22,4 +23,22 @@
 .nav-masthead .active {
   color: #fff;
   border-bottom-color: #fff;
+}
+
+
+#logo {
+  width: 71px;
+  height: 35px;
+
+  position: absolute;
+  left: 18px;
+  top: 3%;
+  transform: translateY(-50%);
+}
+
+.main-img {
+  background-image: url('/assets/img/city.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0%;
 }

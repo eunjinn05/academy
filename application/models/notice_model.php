@@ -89,8 +89,8 @@
     }
 
     public function notice_list_exec($start, $end) {
-        $sql = "SELECT * FROM notice limit $start, $end";
-        $query = $this->db->query($sql);
+        $sql = "SELECT * FROM notice limit ?, ?";
+        $query = $this->db->query($sql, array($start, $end));
         return $query;
     }
 
@@ -113,5 +113,15 @@
         return $result;
     }
 
+    public function notice_delete_exec() {
+        $idx = $_POST['idx'];
+        $sql = "DELETE FROM notice WHERE idx = ?";
+        $query = $this->db->query($sql, array($idx));
+        if ($query) {
+            echo json_encode(array('result'=>true));
+        } else {
+            echo json_encode(array('result'=>false));
+        }
+    }
 
 }

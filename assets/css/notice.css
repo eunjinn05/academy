@@ -23,12 +23,30 @@ th, tr, td {
 }
 
 .notice-list-bottom {
-    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .notice-list-write-btn {
-    margin-left: 90%;
+    position: absolute;
+    right: 0;
 }
+
+.pagination {
+    margin-top: 20px;
+}
+
+.page-item.active .page-link {
+    background-color: gray;
+    border-color: gray;
+}
+
+.page-link {
+    color: black;
+}
+
 
 .notice-input-text {
     width: 90%;

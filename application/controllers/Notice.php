@@ -8,16 +8,32 @@ class Notice extends CI_Controller {
 		$this->load->library('pagination');
         $this->load->model('notice_model');
 
-		$config['base_url'] = 'http://127.0.0.1:81/index.php/notice/list';
+		$config['base_url'] = '/index.php/notice/list';
 		$config['total_rows'] = $this->notice_model->notice_board_count();
 		$config['per_page'] = 10;
         $config['uri_segment'] = 3;
         $config['use_page_numbers'] = TRUE;
+		$config['num_links'] = 5;
 
-        // Initialize the pagination library
+		// 디자인 커스터마이징 설정
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
+		$config['attributes'] = array('class' => 'page-link'); // 링크 태그에 클래스 추가
+
         $this->pagination->initialize($config);
 
-        // Fetch paginated data from your model
         $limit = $config['per_page'];
         $page_number = $this->uri->segment($config['uri_segment'], 1);
         $start_index = ($page_number - 1) * $limit;
@@ -26,6 +42,7 @@ class Notice extends CI_Controller {
 
         $class_data['class_name'] = $this->router->fetch_class();
         $class_data['list_data'] = $this->notice_model->notice_list_exec($start_index, $limit);
+		$class_data['total_rows'] = $start_index;
 
 		$this->load->view("layout/head", $class_data);
 		$this->load->view('notice/list');
@@ -52,5 +69,10 @@ class Notice extends CI_Controller {
 	public function notice_upload_exec() {
         $this->load->model('notice_model');
         $this->notice_model->notice_upload_exec();
+	}
+	
+	public function notice_delete_exec() {
+        $this->load->model('notice_model');
+        $this->notice_model->notice_delete_exec();
 	}
 }

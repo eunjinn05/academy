@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cover Template · Bootstrap v5.0</title>
+    <title>M!N Engl!sh</title>
     
     <link href="/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/common.css" rel="stylesheet">
@@ -14,6 +14,6 @@
     <?php } ?>
   </head>
   <body class="d-flex h-100 text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column <?php if($this->router->fetch_class() == "main") echo "main-img"?>">
 
     <?php  include_once "menu.php"; ?>

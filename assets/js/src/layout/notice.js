@@ -37,9 +37,9 @@ $(function(){
                   idx : idx
               },
             success: function (result) {
-              var res = JSON.parse(result);
-              if (res.result == true) {
-                alert("등록되었습니다.");
+              console.log(result);
+              if (result.return == true) {
+                history.back();
               } else {
                 alert("다시 확인해주세요.");
               }
@@ -85,6 +85,31 @@ $(function(){
         CKEDITOR.instances[instance].updateElement();
       }
     }
+
+    $(document).on("click", ".board-del", function () {
+      var idx = $(this).data('idx');
+
+      if(confirm("정말 삭제하시겠습니까?")) {
+        $.ajax({
+          type : "POST", 
+          url : '/index.php/notice/notice_delete_exec',
+          data : {
+            idx : idx
+          },
+          success: function (result) {
+            var res = JSON.parse(result);
+            console.log(res);
+            if (res.result) {
+              alert("삭제되었습니다.");
+              location.reload();
+            } else {
+              alert("다시 시도해주세요");
+            }
+          }
+        });
+      }
+
+    });
 
 
 

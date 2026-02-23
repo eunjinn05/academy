@@ -24,7 +24,7 @@
         <?php echo $this->pagination->create_links();?>    
         <?php if (@$_SESSION['admin']) { ?>
             <div class="notice-list-write-btn">
-                <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">글쓰기</a>        
+                <a href="/index.php/notice/write" class="btn btn-sm btn-secondary fw-bold border-white">글쓰기</a>        
             </div>
         <?php }?>
     </div>

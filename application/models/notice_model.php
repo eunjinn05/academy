@@ -89,7 +89,7 @@
     }
 
     public function notice_list_exec($start, $end) {
-        $sql = "SELECT * FROM notice limit ?, ?";
+        $sql = "SELECT * FROM notice ORDER BY idx DESC limit ?, ?";
         $query = $this->db->query($sql, array($start, $end));
         return $query;
     }

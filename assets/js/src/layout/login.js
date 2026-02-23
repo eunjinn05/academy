@@ -29,8 +29,19 @@ $(function(){
                     alert("아이디 비밀번호를 확인해주세요.");
                 }
             }
-        })
-        
-            
+        })    
     });
+
+    $(document).on("keydown", "input[type='text'], input[type='password']", function (e) {
+        if (e.key === 'Enter') {
+            $('#loginButton').trigger('click');
+        }
+    });
+
+
+
+
+
+
+
 });

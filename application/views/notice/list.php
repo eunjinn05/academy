@@ -10,11 +10,11 @@
         <?php $con = 1; foreach ($list_data->result() as $row) { ?>
         <tr>
             <td><?php echo $total_rows + $con; ?></td>
-            <td><?php echo $row->title; ?></td>
+            <td><a href="/index.php/notice/view/<?php echo $row->idx; ?>"><?php echo $row->title; ?></a></td>
             <td><?php echo $row->writer; ?></td>
             <td>
                 <a href="/index.php/notice/write/<?php echo $row->idx; ?>" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>
-                <a href="#" class="btn btn-sm btn-secondary fw-bold border-white board-del" data-idx="<?php echo $row->idx; ?>">삭제</a>
+                <a href="#" class="btn btn-sm btn-secondary fw-bold border-white board-del" data-idx="<?php echo $row->idx; ?>" data-session="<?php echo @$_SESSION['admin']; ?>">삭제</a>
             </td>
         </tr>
         <?php $con++; } ?>
@@ -22,9 +22,11 @@
 
     <div class="notice-list-bottom">    
         <?php echo $this->pagination->create_links();?>    
-        <div class="notice-list-write-btn">
-            <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">글쓰기</a>        
-        </div>
+        <?php if (@$_SESSION['admin']) { ?>
+            <div class="notice-list-write-btn">
+                <a href="#" class="btn btn-sm btn-secondary fw-bold border-white">글쓰기</a>        
+            </div>
+        <?php }?>
     </div>
 </main>
 

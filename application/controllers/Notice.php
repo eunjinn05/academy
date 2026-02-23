@@ -51,6 +51,11 @@ class Notice extends CI_Controller {
     
 	public function write($idx = null)
 	{
+		
+        if (!$_SESSION['admin']) {
+            echo "<script>alert('잘못된 경로입니다.'); history.back(); </script>";
+        }
+
 		if ($idx != null) {
 			$this->load->model('notice_model');
 			$class_data['write_data'] = $this->notice_model->notice_data_exec($idx);
@@ -74,5 +79,17 @@ class Notice extends CI_Controller {
 	public function notice_delete_exec() {
         $this->load->model('notice_model');
         $this->notice_model->notice_delete_exec();
+	}
+	
+	public function view($idx = null)
+	{
+        $this->load->model('notice_model');
+
+        $class_data['data'] = $this->notice_model->notice_data_exec($idx);
+
+        $class_data['class_name'] = $this->router->fetch_class();
+		$this->load->view("layout/head", $class_data);
+		$this->load->view('notice/view');
+        $this->load->view('layout/footer', $class_data);
 	}
 }

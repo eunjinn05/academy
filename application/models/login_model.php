@@ -16,15 +16,19 @@
                         $password = $_POST['password'];
 
                         if ($id == "admin" && $password == "password") {
+                                $_SESSION['admin'] = true;
                                 echo json_encode(array('result'=>true));
                         } else {
                                 echo json_encode(array('result'=>false));
                         }
-                } else {
-
-                }
-
-
+                } 
         }
 
+        public function logout_exec()
+        {
+                unset($_SESSION['admin']);
+                echo "<script> location.href='/'; </script>";
+                
+
+        }
 }

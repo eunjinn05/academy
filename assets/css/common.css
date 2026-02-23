@@ -25,7 +25,6 @@
   border-bottom-color: #fff;
 }
 
-
 #logo {
   width: 71px;
   height: 35px;
@@ -42,3 +41,10 @@
   background-size: cover;
   background-position: 0%;
 }
+
+a, a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+

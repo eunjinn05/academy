@@ -73,6 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+session_start();
+
 $db['default'] = array(
 	'dsn'	=> 'mysql:host=localhost:3307;dbname=academy',
 	'hostname' => 'localhost:3307',

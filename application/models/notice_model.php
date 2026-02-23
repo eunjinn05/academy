@@ -94,10 +94,15 @@
         return $query;
     }
 
-    public function notice_data_exec($idx = 1) {
+    public function notice_data_exec($idx) {
+
         $sql = "SELECT * FROM notice WHERE idx = ?";
         $query = $this->db->query($sql, array($idx));
-        $arr['notice'] = $query->row();        
+        $arr['notice'] = $query->row();
+
+        if (!$idx || $arr['notice'] == null) {
+            echo "<script>alert('잘못된 경로입니다.'); history.back(); </script>";
+        }
 
         $sql2 = "SELECT * FROM file WHERE board_type = 'notice' AND board_idx = ?";
         $arr['files'] = $this->db->query($sql2, array($idx))->result_array();

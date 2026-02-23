@@ -88,6 +88,12 @@ $(function(){
 
     $(document).on("click", ".board-del", function () {
       var idx = $(this).data('idx');
+      var admin = $(this).data('session');
+
+      if (!admin) {
+        alert("관리자만 삭제 가능합니다. 로그인해주세요.");
+        return false;
+      }
 
       if(confirm("정말 삭제하시겠습니까?")) {
         $.ajax({

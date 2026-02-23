@@ -16,4 +16,9 @@ class Login extends CI_Controller {
         $this->load->model('login_model');
         $this->login_model->login_exec();
     }
+    
+    public function logout_exec() {
+        $this->load->model('login_model');
+        $this->login_model->logout_exec();
+    }
 }

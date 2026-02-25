@@ -6,8 +6,13 @@
     </div>
 
     <div>
-        <?php for($i=0; $i<count($data['files']); $i++ ) { ?>
-            <img src="<?php echo $data['files'][$i]['file_path']; ?>" class="notice-img">
+        <?php for($i=0; $i<count($data['files']); $i++ ) {
+            $ext_arr = explode('.', $data['files'][$i]['file_path']);
+            
+            if (in_array(end($ext_arr), ['jpg', 'jpeg', 'png', 'gif'])) { ?>
+                <img src="<?php echo $data['files'][$i]['file_path']; ?>" class="notice-img">
+    <?php   } else?>
+                <a href="<?php echo $data['files'][$i]['file_path']; ?>"><p>[<?php echo end($ext_arr); ?>] 파일 다운로드</p></a>
         <?php } ?>
     </div>
 

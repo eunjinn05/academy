@@ -1,17 +1,14 @@
-<main class="px-3 form-notice-write">
-    <h3>공지사항 작성</h3>
-    <table class="notice-write-table">
-        <tr style="height:10%;">
-            <td>제목</td>
-            <td>
-                <input type="text" class="form-control notice-input-text" id="title" value="<?php echo (@$write_data['notice']->title) ? $write_data['notice']->title: ''; ?>" placeholder="제목을 입력해주세요">
-            </td>
-        </tr>
+<main class="px-3 form-assignment-write">
+    <h3>Assignment 작성</h3>
+
+    <table class="assignment-write-table">
         <tr>
-            <td>내용</td>
-            <td>
-                <textarea id="content" name="editor1" class="notice-textarea"><?php echo (@$write_data['notice']->content) ? $write_data['notice']->content : '';?></textarea>
-            </td>    
+            <td>카테고리</td>
+            <td> 
+                <input type="radio" id="word" name="assignment_type" value="word"> <label for="word">단어</label>
+                <input type="radio" id="grammar" name="assignment_type" value="grammar"> <label for="grammar">문법</label>
+                <input type="radio" id="reading" name="assignment_type" value="reading"> <label for="reading">독해</label>
+            </td>
         </tr>
         <tr style="height:10%">
             <td>첨부파일</td>
@@ -30,12 +27,12 @@
                         } ?>
                 </div>
             </td>
-        </tr>
+       </tr>
     </table>
 
     <div class="write-btn-form">
         <a href="#" id="writeBtn" class="btn btn-lg btn-secondary fw-bold border-white">등록하기</a>
-        <input type="hidden" id="idx" value="<?php echo (@$write_data['notice']->idx) ? $write_data['notice']->idx : ''; ?>">
+        <input type="hidden" id="idx" value="<?php echo (@$write_data['assignment']->idx) ? $write_data['assignment']->idx : ''; ?>">
     </div>
 </main>
 

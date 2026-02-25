@@ -39,7 +39,7 @@ $(function(){
             success: function (result) {
               console.log(result);
               if (result.return == true) {
-                history.back();
+                // history.back();
               } else {
                 alert("다시 확인해주세요.");
               }
@@ -70,7 +70,12 @@ $(function(){
             var res = JSON.parse(result);
             if (res.success) {
               for(var i=0; i<res.files.length; i++) {
-                $('.upload-file-list').append("<div class='upload-file'><img src='"+res.files[i].path+"' class='upload-file-img'> <input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+                if (res.ext == "png" || res.ext == "jpg" || res.ext == "jpeg" || res.ext == "gif") {
+                  $('.upload-file-list').append("<div class='upload-file'><img src='"+res.files[i].path+"' class='upload-file-img'>");
+                  $('.upload-file-list').append("<input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+                } else {
+                  $('.upload-file-list').append("<div class='upload-file'><input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+                }
               }
             } else {
               alert(res.message);

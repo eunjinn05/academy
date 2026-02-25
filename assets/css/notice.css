@@ -18,10 +18,6 @@ tr {
     height: 85px;
 }
 
-th, tr, td {
-    border: solid 1px #eee;
-}
-
 .notice-list-bottom {
     display: flex;
     justify-content: center;

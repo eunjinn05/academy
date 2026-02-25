@@ -35,16 +35,12 @@
   transform: translateY(-50%);
 }
 
-.main-img {
-  background-image: url('/assets/img/city.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0%;
-}
-
 a, a:hover {
   text-decoration: none;
   color: inherit;
 }
 
+th, tr, td {
+    border: solid 1px #eee;
+}
 

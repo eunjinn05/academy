@@ -1,0 +1,11 @@
+.form-assignment-list, .form-assignment-write {
+  margin: auto;
+  height: 80%;
+  width: 80%
+}
+
+.assignment-list-table, .assignment-write-table {
+    border: solid 1px #eee;
+    margin: 0 auto;
+    width: 80%;
+}

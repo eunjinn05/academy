@@ -12,6 +12,7 @@
             $content = @$_POST['content'];
             $files = @$_POST['files'];
             $idx = @$_POST['idx'];
+            $original_name = @$_POST['original_name'];
 
             if (@$title && @$content) {
                 if (@$idx) {
@@ -28,8 +29,8 @@
                 if ($res) {
                     if (@$files) {
                         for ($i=0; $i<count($files); $i++) {
-                            echo $sql = "INSERT INTO file (board_type, file_path, board_idx) VALUES (?, ?, ?)";
-                            $res = $this->db->query($sql, array('notice', $files[$i], $idx));
+                            $sql = "INSERT INTO file (board_type, file_path, original_name, board_idx) VALUES (?, ?, ?, ?)";
+                            $res = $this->db->query($sql, array('notice', $files[$i], $original_name[$i], $idx));
                         }
                     }
                     echo json_encode(array("return"=>true));
@@ -53,11 +54,11 @@
             $png_compression = 5; // PNG 압축 (0~9)
 
             for ($i=0; $i < count($_FILES['files']['name']); $i++) {
+
                 // 파일 크기 체크
                 if ($_FILES['files']['size'][$i] > $max_file_size) {
                     $response['success'] = false;
                     $response['message'] = "파일이 크기를 초과하였습니다. (최대 5MB)";
-                    $response['ext'] = $ext;
                     return false;
                 }
 
@@ -68,7 +69,6 @@
                 if (!in_array($ext, $allowed_extensions)) {
                     $response['success'] = false;
                     $response['message'] = "허용되지 않은 파일 형식입니다.";
-                    $response['ext'] = $ext;
                     return false;
                 }
 
@@ -85,7 +85,9 @@
                 if (move_uploaded_file($_FILES['files']['tmp_name'][$i], $upload_path)) {
                     $response['files'][] = [
                         'saved_name' => $new_name,
-                        'path' => "/".$upload_path
+                        'original_name' => $original_name,
+                        'path' => "/".$upload_path,
+                        "ext" => $ext
                     ];
 
                     if (in_array($ext, $photo_extensions)) {
@@ -95,12 +97,10 @@
                 } else {
                     $response['success'] = false;
                     $response['message'] = "다시 시도해주세요.";
-                    $response['ext'] = $ext;
                     return false;
                 }
                 $response['success'] = true;
                 $response['message'] = count($response['files']) . '개 파일 처리 완료';
-                $response['ext'] = $ext;
             }
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
     }

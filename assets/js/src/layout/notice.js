@@ -10,6 +10,7 @@ $(function(){
       var content = $('#content').val();
       var idx = $("#idx").val();
       var files = Array();
+      var original_name = Array();
 
        if (title == "") {
           alert("제목을 입력해주세요.");
@@ -24,6 +25,10 @@ $(function(){
         $(".upload-file-data").each(function(i, e) {
           files.push($(e).val());
         });
+        
+        $(".upload-file-original-name-data").each(function(i, e) {
+          original_name.push($(e).val());
+        });
 
        $.ajax({
             type : "POST", 
@@ -34,12 +39,12 @@ $(function(){
                   title : title,
                   content : content,
                   files : files,
-                  idx : idx
+                  idx : idx,
+                  original_name : original_name
               },
             success: function (result) {
-              console.log(result);
               if (result.return == true) {
-                // history.back();
+                location.href = '/index.php/notice/list';
               } else {
                 alert("다시 확인해주세요.");
               }
@@ -70,11 +75,12 @@ $(function(){
             var res = JSON.parse(result);
             if (res.success) {
               for(var i=0; i<res.files.length; i++) {
-                if (res.ext == "png" || res.ext == "jpg" || res.ext == "jpeg" || res.ext == "gif") {
+                if (res.files[i].ext == "png" || res.files[i].ext == "jpg" || res.files[i].ext == "jpeg" || res.files[i].ext == "gif") {
                   $('.upload-file-list').append("<div class='upload-file'><img src='"+res.files[i].path+"' class='upload-file-img'>");
-                  $('.upload-file-list').append("<input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+                  $('.upload-file-list').append("<input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'>");
+                  $('.upload-file-list').append("<input type='hidden' class='upload-file-original-name-data' value='"+res.files[i].original_name+"'></div>");
                 } else {
-                  $('.upload-file-list').append("<div class='upload-file'><input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'></div>");
+                  $('.upload-file-list').append("<div class='upload-file'><input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'><input type='hidden' class='upload-file-original-name-data' value='"+res.files[i].original_name+"'></div>");
                 }
               }
             } else {

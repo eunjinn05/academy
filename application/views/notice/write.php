@@ -21,12 +21,21 @@
                 <div class="upload-file-list">
                     <?php
                         if (@$write_data) {
-                            for ($i=0; $i<count($write_data['files']); $i++) { ?>
-                                <div class="upload-file">
-                                    <img src="<?php echo $write_data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
-                                    <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i]['file_path'];?>'>
-                                </div>     
-                    <?php   } 
+                            for ($i=0; $i<count($write_data['files']); $i++) { 
+                                $ext_arr = explode('.', $write_data['files'][$i]['file_path']);
+                                
+                                if (in_array(end($ext_arr), ['jpg', 'jpeg', 'png', 'gif'])) {  ?>
+                                    <div class="upload-file">
+                                        <img src="<?php echo $write_data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i];?>'>
+                                    </div>
+                    <?php       } else { ?>
+                                    <div class="upload-file">
+                                        <p><?php echo $write_data['files'][$i]['original_name']; ?></p>
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i];?>'>
+                                    </div>        
+                    <?php       }
+                            } 
                         } ?>
                 </div>
             </td>

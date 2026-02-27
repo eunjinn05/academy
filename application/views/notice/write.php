@@ -27,12 +27,14 @@
                                 if (in_array(end($ext_arr), ['jpg', 'jpeg', 'png', 'gif'])) {  ?>
                                     <div class="upload-file">
                                         <img src="<?php echo $write_data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
-                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i];?>'>
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i]['file_path'];?>'>
+                                        <input type='hidden' class='upload-file-original-name-data' value='<?php echo $write_data['files'][$i]['original_name']?>'>
                                     </div>
                     <?php       } else { ?>
                                     <div class="upload-file">
                                         <p><?php echo $write_data['files'][$i]['original_name']; ?></p>
-                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i];?>'>
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i]['file_path'];?>'>
+                                        <input type='hidden' class='upload-file-original-name-data' value='<?php echo $write_data['files'][$i]['original_name']?>'>
                                     </div>        
                     <?php       }
                             } 

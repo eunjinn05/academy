@@ -10,7 +10,7 @@
         <?php $con = 1; foreach ($list_data->result() as $row) { ?>
         <tr>
             <td><?php echo $total_rows + $con; ?></td>
-            <td><a href="/index.php/notice/view/<?php echo $row->idx; ?>"><?php echo $row->title; ?></a></td>
+            <td class="notice-view" data-idx="<?php echo $row->idx; ?>"><?php echo $row->title; ?></td>
             <td><?php echo $row->writer; ?></td>
             <td>
                 <a href="/index.php/notice/write/<?php echo $row->idx; ?>" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>

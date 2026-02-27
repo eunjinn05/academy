@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        left: '',
-        center: 'title'
-      }
-    });
-    calendar.render();
-
+    if (calendarEl != null) {
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        headerToolbar: {
+          left: '',
+          center: 'title'
+        }
+      });
+      calendar.render();
+    }
 
     $(document).on("click", ".fc-day", function () {
         var date = $(this).data('date');
         console.log(date);
     });
-
     
     $(document).on("change", "#file", function () {
       var formData = new FormData();
@@ -43,4 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
     });
+
+    $(document).on("click", "#writeBtn", function () {
+      
+    });
+    
 });

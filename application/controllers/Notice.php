@@ -72,8 +72,8 @@ class Notice extends CI_Controller {
 	}
 	
 	public function notice_upload_exec() {
-        $this->load->model('notice_model');
-        $this->notice_model->notice_upload_exec();
+        $this->load->model('common_model');
+        $this->common_model->upload_exec();
 	}
 	
 	public function notice_delete_exec() {

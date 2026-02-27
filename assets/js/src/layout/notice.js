@@ -80,7 +80,7 @@ $(function(){
                   $('.upload-file-list').append("<input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'>");
                   $('.upload-file-list').append("<input type='hidden' class='upload-file-original-name-data' value='"+res.files[i].original_name+"'></div>");
                 } else {
-                  $('.upload-file-list').append("<div class='upload-file'><input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'><input type='hidden' class='upload-file-original-name-data' value='"+res.files[i].original_name+"'></div>");
+                  $('.upload-file-list').append("<div class='upload-file'><p>"+res.files[i].original_name+"</p><input type='hidden' class='upload-file-data' value='"+res.files[i].path+"'><input type='hidden' class='upload-file-original-name-data' value='"+res.files[i].original_name+"'></div>");
                 }
               }
             } else {
@@ -128,7 +128,10 @@ $(function(){
 
     });
 
-
+    $(document).on("click", ".notice-view", function () {
+      var idx = $(this).data('idx');
+      location.href = "/index.php/notice/view/"+idx;
+    });
 
 
 

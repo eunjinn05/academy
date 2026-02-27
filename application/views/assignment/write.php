@@ -5,9 +5,15 @@
         <tr>
             <td>카테고리</td>
             <td> 
-                <input type="radio" id="word" name="assignment_type" value="word"> <label for="word">단어</label>
+                <input type="radio" id="word" name="assignment_type" value="word" checked> <label for="word">단어</label>
                 <input type="radio" id="grammar" name="assignment_type" value="grammar"> <label for="grammar">문법</label>
                 <input type="radio" id="reading" name="assignment_type" value="reading"> <label for="reading">독해</label>
+            </td>
+        </tr>
+        <tr>
+            <td>날짜</td>
+            <td> 
+                <input type="date" id="date" name="assignment_date">
             </td>
         </tr>
         <tr style="height:10%">

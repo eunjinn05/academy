@@ -16,6 +16,12 @@
                 <input type="date" id="date" name="assignment_date">
             </td>
         </tr>
+        <tr>
+            <td>내용</td>
+            <td>
+                <textarea id="content" name="editor1" class="notice-textarea"><?php echo (@$write_data['notice']->content) ? $write_data['notice']->content : '';?></textarea>
+            </td>    
+        </tr>
         <tr style="height:10%">
             <td>첨부파일</td>
             <td>

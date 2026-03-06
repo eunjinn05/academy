@@ -76,11 +76,11 @@ $query_builder = TRUE;
 session_start();
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost:3307;dbname=academy',
-	'hostname' => 'localhost:3307',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'academy',
+	'dsn'	=> 'mysql:host=ketchup4.mycafe24.com;dbname=ketchup4',
+	'hostname' => 'ketchup4.mycafe24.com',
+	'username' => 'ketchup4',
+	'password' => 'Myenglish44',
+	'database' => 'ketchup4',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '', 
 	'pconnect' => FALSE,

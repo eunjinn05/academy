@@ -15,7 +15,7 @@ $(function(){
 
        $.ajax({
             type : "POST", 
-            url : '/index.php/login/login_exec',
+            url : 'https://ketchup4.mycafe24.com/index.php/login/login_exec',
             dataType: 'json',
 			async: false,
             data : {

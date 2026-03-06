@@ -9,3 +9,17 @@
     margin: 0 auto;
     width: 80%;
 }
+
+.assignment-img {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.upload-file {
+    display: inline;
+}
+
+.upload-file-img {
+    width:150px;
+    height:150px;
+}

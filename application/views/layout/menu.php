@@ -2,7 +2,7 @@
     <div>
     <nav class="nav nav-masthead justify-content-center float-md-end">
         <a href="/"><img id="logo" src="/assets/img/logo.jpg"></a>
-        <a href="/" class="nav-link <?php if($this->router->fetch_class() == "main") echo "active";?>">Home</a>
+        <a href="/" class="nav-link <?php if($this->router->fetch_class() == "main") echo "active";?>"></a>
         <a href="/index.php/notice/list" class="nav-link <?php if($this->router->fetch_class() == "notice") echo "active";?>">공지사항</a>
         <a href="/index.php/assignment/calendar" class="nav-link <?php if($this->router->fetch_class() == "assignment") echo "active";?>">Assignment</a>
         <?php if (@$_SESSION['admin']) { ?>

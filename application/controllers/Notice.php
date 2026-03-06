@@ -51,7 +51,6 @@ class Notice extends CI_Controller {
     
 	public function write($idx = null)
 	{
-		
         if (!$_SESSION['admin']) {
             echo "<script>alert('잘못된 경로입니다.'); history.back(); </script>";
         }

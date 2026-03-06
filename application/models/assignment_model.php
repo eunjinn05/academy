@@ -6,11 +6,65 @@
                 parent::__construct();
         }
 
-        public function login_exec()
+        public function assignment_write_exec()
         {
+            $category = @$_POST['category'];
+            $assignment_date = @$_POST['assignment_date'];
+            $content = @$_POST['content'];
+            $files = @$_POST['files'];
+            $idx = @$_POST['idx'];
+            $original_name = @$_POST['original_name'];
+
+            if (@$content) {
+                if (@$idx) {
+                    $sql = "DELETE FROM file WHERE board_type = ? AND board_idx = ?";
+                    $res = $this->db->query($sql, array('assignment', $idx));
+
+                    $sql = "UPDATE assignment SET assignment_date = ?, category = ?, content = ? WHERE idx = ?";
+                    $res = $this->db->query($sql, array($assignment_date, $category, $content, $idx));
+                } else {
+                    $sql = "INSERT INTO assignment (assignment_date, category, content) VALUES (?, ?, ?)";
+                    $res = $this->db->query($sql, array($assignment_date, $category, $content));
+                    echo $idx = $this->db->insert_id();
+                }
+                if ($res) {
+                    if (@$files) {
+                        for ($i=0; $i<count($files); $i++) {
+                            $sql = "INSERT INTO file (board_type, file_path, original_name, board_idx) VALUES (?, ?, ?, ?)";
+                            $res = $this->db->query($sql, array('assignment', $files[$i], $original_name[$i], $idx));
+                        }
+                    }
+                    echo json_encode(array("return"=>true));
+                } else {
+                    echo json_encode(array('return'=>false));
+                }
+            }
 
         }
 
+        public function assignment_data_exec($assignment_date, $category) {
+            
+            $sql = "SELECT category FROM assignment WHERE assignment_date = ?";
+            $arr['category_arr'] = $this->db->query($sql, array($assignment_date))->result_array();
+            $arr['category'] = @$arr['category_arr'][0]['category'];
+            if ($category == "") {
+                $category = $arr['category'];
+            }
+
+            $sql = "SELECT * FROM assignment WHERE assignment_date = ? AND category = ?";
+            $query = $this->db->query($sql, array($assignment_date, $category));
+            $arr['assignment'] = $query->row();
+
+            if (!$assignment_date) {
+                echo "<script>alert('잘못된 경로입니다.'); history.back(); </script>";
+            } else {
+                $sql2 = "SELECT * FROM file WHERE board_type = 'assignment' AND board_idx = ?";
+                $arr['files'] = $this->db->query($sql2, array(@$arr['assignment']->idx))->result_array();
+
+                return $arr;
+            }
+
+        }
     }
 
 ?>

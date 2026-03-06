@@ -21,4 +21,31 @@ class Assignment extends CI_Controller {
         $this->load->view('layout/footer', $class_data);
 	}
 
+	public function assignment_upload_exec() {
+        $this->load->model('common_model');
+        $this->common_model->upload_exec();
+	}
+
+	public function assignment_write_exec()
+	{
+        $this->load->model('assignment_model');
+        $this->assignment_model->assignment_write_exec();
+	}
+
+	public function view($assignment_date = null, $category = "")
+	{
+        $this->load->model('assignment_model');
+
+        $class_data['data'] = $this->assignment_model->assignment_data_exec($assignment_date, $category);
+		$class_data['assignment_date'] = $assignment_date;
+		$class_data['category'] = $category;
+
+        $class_data['class_name'] = $this->router->fetch_class();
+		$this->load->view("layout/head", $class_data);
+		$this->load->view('assignment/view');
+        $this->load->view('layout/footer', $class_data);
+	}
+
+
+
 }

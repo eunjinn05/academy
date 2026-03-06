@@ -103,8 +103,31 @@ document.addEventListener('DOMContentLoaded', function() {
             }
           }
       })
+    });
+
+    $(document).on("change", "[name='assignment_type']", function () {
+
 
     });
+
+    $(document).on("click", ".assignment_del", function () {
+      var idx = $(this).data('idx');
+
+      $.ajax({
+          type : "POST", 
+          url : '/index.php/assignment/assignment_delete_exec',
+          dataType: 'json',
+          async: false,
+            data : {
+                idx : idx
+            },
+          success: function (result) {
+            location.href = '/index.php/assignment/calendar';
+          }
+      });
+
+    });
+    
 
     $(document).on("click", ".assignment_type_chk", function () {
       var category = $(this).val();

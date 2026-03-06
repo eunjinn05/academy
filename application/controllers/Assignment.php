@@ -12,9 +12,15 @@ class Assignment extends CI_Controller {
         $this->load->view('layout/footer', $class_data);
 	}
 
-	public function write()
+	public function write($assignment_date = null)
 	{
         $class_data['class_name'] = $this->router->fetch_class();
+		$class_data['assignment_date'] = $assignment_date;
+		
+		if ($assignment_date) {
+	        $this->load->model('assignment_model');
+	        $class_data['data'] = $this->assignment_model->assignment_data_exec($assignment_date, 'word', 'write');
+		}
 
         $this->load->view("layout/head", $class_data);
 		$this->load->view('assignment/write');
@@ -46,6 +52,11 @@ class Assignment extends CI_Controller {
         $this->load->view('layout/footer', $class_data);
 	}
 
+	public function assignment_delete_exec()
+	{
+        $this->load->model('assignment_model');
+        $this->assignment_model->assignment_delete_exec();
+	}
 
 
 }

@@ -25,7 +25,7 @@
                 } else {
                     $sql = "INSERT INTO assignment (assignment_date, category, content) VALUES (?, ?, ?)";
                     $res = $this->db->query($sql, array($assignment_date, $category, $content));
-                    echo $idx = $this->db->insert_id();
+                    $idx = $this->db->insert_id();
                 }
                 if ($res) {
                     if (@$files) {
@@ -42,7 +42,7 @@
 
         }
 
-        public function assignment_data_exec($assignment_date, $category) {
+        public function assignment_data_exec($assignment_date, $category, $type = "view") {
             
             $sql = "SELECT category FROM assignment WHERE assignment_date = ?";
             $arr['category_arr'] = $this->db->query($sql, array($assignment_date))->result_array();
@@ -55,6 +55,11 @@
             $query = $this->db->query($sql, array($assignment_date, $category));
             $arr['assignment'] = $query->row();
 
+            if (!$arr['assignment'] && $type == 'view') {
+                echo "<script>alert('해당 날짜의 숙제가 없습니다! 야호!'); history.back(); </script>";
+
+            }
+
             if (!$assignment_date) {
                 echo "<script>alert('잘못된 경로입니다.'); history.back(); </script>";
             } else {
@@ -64,6 +69,23 @@
                 return $arr;
             }
 
+        }
+        
+        public function assignment_delete_exec()
+        {
+            $idx = @$_POST['idx'];
+
+            $sql = "DELETE FROM file WHERE board_type = ? AND board_idx = ?";
+            $res = $this->db->query($sql, array('assignment', $idx));
+            
+            $sql = "DELETE FROM assignment WHERE idx = ?";
+            $res = $this->db->query($sql, array($idx));
+                
+            if ($res) {
+                echo json_encode(array('result'=>true));
+            } else {
+                echo json_encode(array('result'=>false));
+            }
         }
     }
 

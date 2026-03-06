@@ -71,8 +71,12 @@
 
         public function notice_delete_exec() {
             $idx = $_POST['idx'];
+            $sql = "DELETE FROM file WHERE board_type = ? AND board_idx = ?";
+            $query = $this->db->query($sql, array('notice', $idx));
+            
             $sql = "DELETE FROM notice WHERE idx = ?";
             $query = $this->db->query($sql, array($idx));
+
             if ($query) {
                 echo json_encode(array('result'=>true));
             } else {

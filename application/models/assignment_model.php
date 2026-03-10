@@ -44,12 +44,16 @@
 
         public function assignment_data_exec($assignment_date, $category, $type = "view") {
             
-            $sql = "SELECT category FROM assignment WHERE assignment_date = ?";
-            $arr['category_arr'] = $this->db->query($sql, array($assignment_date))->result_array();
-            $arr['category'] = @$arr['category_arr'][0]['category'];
-            if ($category == "") {
-                $category = $arr['category'];
+            $arr['category'] = $category;
+            if ($type == "view") {
+                $sql = "SELECT category FROM assignment WHERE assignment_date = ?";
+                $arr['category_arr'] = $this->db->query($sql, array($assignment_date))->result_array();
+                $arr['category'] = @$arr['category_arr'][0]['category'];
+                if ($category == "") {
+                    $category = $arr['category'];
+                }
             }
+            
 
             $sql = "SELECT * FROM assignment WHERE assignment_date = ? AND category = ?";
             $query = $this->db->query($sql, array($assignment_date, $category));

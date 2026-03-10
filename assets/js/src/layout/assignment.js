@@ -106,6 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $(document).on("change", "[name='assignment_type']", function () {
+      var idx = $('#idx').val();
+      var assignment_date = $('#assignment_date').val();
+      var category = $('[name="assignment_type"]:checked').val();
+      if (idx != null) {
+        location.href = '/index.php/assignment/write/'+assignment_date+'/'+category;
+      }
 
 
     });

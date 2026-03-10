@@ -31,7 +31,7 @@
 
     <?php // if (@$_SESSION['admin']) { ?>
         <div class="calender-write-btn">
-            <a href="/index.php/assignment/write/<?php echo @$assignment_date ?>" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>    
+            <a href="/index.php/assignment/write/<?php echo @$assignment_date ?>/<?php echo @$category; ?>" class="btn btn-sm btn-secondary fw-bold border-white">수정</a>    
             <a class="btn btn-sm btn-secondary fw-bold border-white assignment_del" data-idx="<?php echo $data['assignment']->idx; ?>">삭제</a>       
         </div>
     <?php // } ?>

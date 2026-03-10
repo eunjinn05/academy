@@ -1,40 +1,39 @@
 <main class="px-3 form-assignment-write">
     <h3>Assignment 작성</h3>
-
     <table class="assignment-write-table">
         <tr>
             <td>카테고리</td>
             <td> 
-                <input type="radio" id="word" name="assignment_type" value="word" checked> <label for="word">단어</label>
-                <input type="radio" id="grammar" name="assignment_type" value="grammar"> <label for="grammar">문법</label>
-                <input type="radio" id="reading" name="assignment_type" value="reading"> <label for="reading">독해</label>
+                <input type="radio" id="word" name="assignment_type" value="word" <?php echo (@$data['category'] == "word" || !@$data['category']) ? 'checked' : ''; ?> > <label for="word">단어</label>
+                <input type="radio" id="grammar" name="assignment_type" value="grammar" <?php echo (@$data['category'] == "grammar") ? 'checked' : ''; ?>> <label for="grammar">문법</label>
+                <input type="radio" id="reading" name="assignment_type" value="reading" <?php echo (@$data['category'] == "reading") ? 'checked' : ''; ?>> <label for="reading">독해</label>
                 <input type="hidden" id="assignment_date" value="<?php echo $assignment_date; ?>">
             </td>
         </tr>
         <tr>
             <td>날짜</td>
             <td> 
-                <input type="date" id="date" name="assignment_date">
+                <input type="date" id="date" name="assignment_date" value="<?php echo @$data['assignment']->assignment_date; ?>">
             </td>
         </tr>
         <tr>
             <td>내용</td>
             <td>
-                <textarea id="content" name="editor1" class="notice-textarea"><?php echo (@$write_data['notice']->content) ? $write_data['notice']->content : '';?></textarea>
+                <textarea id="content" name="editor1" class="assignment-textarea"><?php echo (@$data['assignment']->content) ? $data['assignment']->content : '';?></textarea>
             </td>    
         </tr>
         <tr style="height:10%">
             <td>첨부파일</td>
             <td>
-                <input type="file" class="form-control notice-input-file" id="file" name="file[]" multiple>
+                <input type="file" class="form-control assignment-input-file" id="file" name="file[]" multiple>
                 <input type="hidden" id="file_idx">
                 <div class="upload-file-list">
                     <?php
-                        if (@$write_data) {
-                            for ($i=0; $i<count($write_data['files']); $i++) { ?>
+                        if (@$data) {
+                            for ($i=0; $i<count($data['files']); $i++) { ?>
                                 <div class="upload-file">
-                                    <img src="<?php echo $write_data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
-                                    <input type='hidden' class='upload-file-data' value='<?php echo $write_data['files'][$i]['file_path'];?>'>
+                                    <img src="<?php echo $data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
+                                    <input type='hidden' class='upload-file-data' value='<?php echo $data['files'][$i]['file_path'];?>'>
                                 </div>     
                     <?php   } 
                         } ?>
@@ -45,7 +44,7 @@
 
     <div class="write-btn-form">
         <a href="#" id="writeBtn" class="btn btn-lg btn-secondary fw-bold border-white">등록하기</a>
-        <input type="hidden" id="idx" value="<?php echo (@$write_data['assignment']->idx) ? $write_data['assignment']->idx : ''; ?>">
+        <input type="hidden" id="idx" value="<?php echo @$data['assignment']->idx; ?>">
     </div>
 </main>
 

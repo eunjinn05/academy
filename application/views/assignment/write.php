@@ -31,11 +31,19 @@
                 <div class="upload-file-list">
                     <?php
                         if (@$data) {
-                            for ($i=0; $i<count($data['files']); $i++) { ?>
-                                <div class="upload-file">
-                                    <img src="<?php echo $data['files'][$i]['file_path'];?>" style="width:150px; height:150px;">
-                                    <input type='hidden' class='upload-file-data' value='<?php echo $data['files'][$i]['file_path'];?>'>
-                                </div>     
+                            for ($i=0; $i<count($data['files']); $i++) {
+                                $ext_arr = explode('.', $data['files'][$i]['file_path']);
+                                if (in_array(end($ext_arr), ['jpg', 'jpeg', 'png', 'gif'])) { ?>
+                                    <div class="upload-file">
+                                        <div><img src="<?php echo $data['files'][$i]['file_path']; ?>" class="assignment-img"></div>
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $data['files'][$i]['file_path'];?>'>
+                                    </div>
+                         <?php  } else { ?>
+                                    <div class="upload-file">
+                                        <div><p>[<?php echo $data['files'][$i]['original_name']; ?>]</p></div>
+                                        <input type='hidden' class='upload-file-data' value='<?php echo $data['files'][$i]['file_path'];?>'>
+                                    </div>
+                        <?php   }?>
                     <?php   } 
                         } ?>
                 </div>

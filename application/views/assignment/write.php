@@ -7,6 +7,7 @@
                 <input type="radio" id="word" name="assignment_type" value="word" <?php echo (@$data['category'] == "word" || !@$data['category']) ? 'checked' : ''; ?> > <label for="word">단어</label>
                 <input type="radio" id="grammar" name="assignment_type" value="grammar" <?php echo (@$data['category'] == "grammar") ? 'checked' : ''; ?>> <label for="grammar">문법</label>
                 <input type="radio" id="reading" name="assignment_type" value="reading" <?php echo (@$data['category'] == "reading") ? 'checked' : ''; ?>> <label for="reading">독해</label>
+                <input type="radio" id="listening" name="assignment_type" value="listening" <?php echo (@$data['category'] == "listening") ? 'checked' : ''; ?>> <label for="listening">듣기</label>
                 <input type="hidden" id="assignment_date" value="<?php echo $assignment_date; ?>">
             </td>
         </tr>

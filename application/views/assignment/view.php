@@ -10,6 +10,8 @@
                     <input type="radio" id="grammar" name="assignment_type" class="assignment_type_chk" value="grammar" <?php echo (@$category == 'grammar' || (!@$category && $data['category_arr'][0]['category'] == 'grammar')) ? "checked" : ""; ?>> <label for="grammar">문법</label>
         <?php } else if ($data['category_arr'][$i]['category'] == 'reading') { ?>
                      <input type="radio" id="reading" name="assignment_type" class="assignment_type_chk" value="reading" <?php echo (@$category == 'reading' || (!@$category && $data['category_arr'][0]['category'] == 'reading')) ? "checked" : ""; ?>> <label for="reading">독해</label>
+        <?php }else if ($data['category_arr'][$i]['category'] == 'listening') { ?>
+                     <input type="radio" id="listening" name="assignment_type" class="assignment_type_chk" value="listening" <?php echo (@$category == 'listening' || (!@$category && $data['category_arr'][0]['category'] == 'listening')) ? "checked" : ""; ?>> <label for="listening">듣기</label>
         <?php } ?>
     <?php   } ?>
  </div>
